@@ -12,7 +12,12 @@ class Product extends React.Component {
             Price: ${this.props.price}
           </div>
         </div>
-        <div className="ui bottom attached button">
+        <div
+          className="ui bottom attached button"
+          onClick={(e) => {
+            this.props.onAddToCart(this.props.name, this.props.price)
+          }}
+        >
           <i className="add icon"></i>
           Add to Cart
         </div>
