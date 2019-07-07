@@ -14,12 +14,21 @@ class Product extends React.Component {
         </div>
         <div
           className="ui bottom attached button"
-          onClick={(e) => {
+          onClick={e => {
             this.props.onAddToCart(this.props.name, this.props.price)
           }}
         >
           <i className="add icon"></i>
           Add to Cart
+        </div>
+        <div
+          className="ui bottom attached button"
+          onClick={e => {
+            this.props.onRemoveFromCart(this.props.name, this.props.price)
+          }}
+        >
+          <i className="remove icon"></i>
+          Remove
         </div>
       </div>
     );

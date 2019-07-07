@@ -2,6 +2,7 @@ import React from "react";
 import "./styles/cart.css";
 import Product from "./Product";
 import ProductData from "./Data";
+import Receipt from "./Receipt";
 
 class Cart extends React.Component {
   constructor(props) {
@@ -31,6 +32,19 @@ class Cart extends React.Component {
     this.setState({cartItems: newCart});
   }
 
+  handleRemoveFromCart(productName, price) {
+    let mappedCart = this.state.cartItems.map(elem => {
+      if (elem.name === productName &&
+          elem.price === price &&
+          elem.count > 0) {
+        elem.count--;
+      }
+      return elem;
+    })
+    let filteredCart = mappedCart.filter(elem => elem.count > 0);
+    this.setState({cartItems: filteredCart});
+  }
+
   render() {
     return (
         <div className="page-content">
@@ -45,11 +59,15 @@ class Cart extends React.Component {
                     onAddToCart={(productName, price) => {
                       this.handleAddToCart(productName, price);
                     }}
+                    onRemoveFromCart={(productName, price) => {
+                      this.handleRemoveFromCart(productName, price);
+                    }}
                   />
                 );
               })
             }
           </div>
+          <Receipt items={this.state.cartItems} />
         </div>
     );
   }
